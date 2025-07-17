@@ -12,4 +12,7 @@
   "workspaces": [
     "packages/*"
   ],
+  "dependencies": {
+    "@hono/trpc-server": "^0.4.0"
+  }
 }

@@ -1,0 +1,67 @@
+version: 3
+
+tasks:
+  lint:
+    desc: "Lint TypeScript code in api, db, and tooling packages"
+    cmds:
+      - |
+        echo "Linting all packages in parallel"
+        cd packages/api && bun run lint & \
+        cd packages/web && bun run lint & \
+        wait
+      
+  lint:fix:
+    desc: "Lint and fix TypeScript code in api, db, and tooling packages"
+    cmds:
+      - |
+        echo "Linting all packages in parallel"
+        cd packages/api && bun run lint:fix & \
+        cd packages/web && bun run lint:fix & \
+        wait
+
+  docker:start:
+    desc: "Start docker containers"
+    cmds:
+      - docker compose up -d --wait
+
+  docker:stop:
+    desc: "Stop docker containers"
+    cmds:
+      - docker compose down
+
+  docker:destroy:
+    desc: "Destroy docker containers"
+    cmds:
+      - docker compose down -v
+
+  docker:reset:
+    desc: "Destroy and start docker containers, and apply migrations"
+    cmds:
+      - |
+        echo "Installing dependencies"
+        bun i
+      - task: docker:destroy
+      - task: docker:start
+
+  start:
+    desc: "Start the core services of the project, in parallel"
+    cmds:
+      - |
+        echo "Installing dependencies"
+        bun i
+
+      - |
+        echo "Checking to see if .env files exist"
+        # files are in packages/api, packages/db, and packages/next-app
+        if [ ! -f packages/api/.env ]; then
+          echo "Creating .env file in packages/api"
+          cp packages/api/.env.example packages/api/.env
+        fi
+        if [ ! -f packages/web/.env ]; then
+          echo "Creating .env file in packages/web"
+          cp packages/web/.env.example packages/web/.env
+        fi
+      - |
+        bunx concurrently --restart-tries 99999999 --restart-after 1000 \
+        "cd packages/api && bun run dev" \
+         "cd packages/web && bun run dev" \
