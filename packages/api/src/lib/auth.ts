@@ -1,11 +1,11 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@nimbus/db";
-import { authSchema } from "@nimbus/db/src/schema/auth.schema";
-import { sendResetPasswordEmail, sendVerificationEmail, sendOrganizationInvitation } from "../routers/email.router";
+import { db } from "@workspace/db";
+import { authSchema } from "@workspace/db/src/schema/auth.schema";
 import { organization } from "better-auth/plugins"
 import { afterCreateUser } from "../hooks/user/after-create";
 import { beforeCreateSession } from "../hooks/session/before-create";
+import { sendOrganizationInvitation, sendResetPasswordEmail, sendVerificationEmail } from "../routers/email.router";
 
 export const auth = betterAuth({
   baseURL: process.env.API_BASE_URL,
