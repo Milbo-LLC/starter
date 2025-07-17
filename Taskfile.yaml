@@ -7,6 +7,7 @@ tasks:
       - |
         echo "Linting all packages in parallel"
         cd packages/api && bun run lint & \
+        cd packages/db && bun run lint & \
         cd packages/web && bun run lint & \
         wait
       
@@ -16,8 +17,21 @@ tasks:
       - |
         echo "Linting all packages in parallel"
         cd packages/api && bun run lint:fix & \
+        cd packages/db && bun run lint:fix & \
         cd packages/web && bun run lint:fix & \
         wait
+
+  db:generate-migrations:
+    desc: "Generate database migrations"
+    dir: packages/db
+    cmds:
+      - bun run drizzle-kit generate
+
+  db:migrate:
+    desc: "Migrate the database"
+    dir: packages/db
+    cmds:
+      - bun run drizzle-kit migrate
 
   docker:start:
     desc: "Start docker containers"
@@ -42,6 +56,7 @@ tasks:
         bun i
       - task: docker:destroy
       - task: docker:start
+      - task: db:migrate
 
   start:
     desc: "Start the core services of the project, in parallel"
@@ -57,11 +72,19 @@ tasks:
           echo "Creating .env file in packages/api"
           cp packages/api/.env.example packages/api/.env
         fi
-        if [ ! -f packages/web/.env ]; then
-          echo "Creating .env file in packages/web"
-          cp packages/web/.env.example packages/web/.env
+        if [ ! -f packages/db/.env ]; then
+          echo "Creating .env file in packages/db"
+          cp packages/db/.env.example packages/db/.env
         fi
+        if [ ! -f packages/web/.env.local ]; then
+          echo "Creating .env.local file in packages/web"
+          cp packages/web/.env.example packages/web/.env.local
+        fi
+      - |
+        echo "Applying migrations to the database"
+      - task: db:migrate
       - |
         bunx concurrently --restart-tries 99999999 --restart-after 1000 \
         "cd packages/api && bun run dev" \
-         "cd packages/web && bun run dev" \
+        "cd packages/db && bun run drizzle-kit studio --port 8082" \
+        "cd packages/web && bun run dev" \

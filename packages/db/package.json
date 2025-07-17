@@ -1,0 +1,28 @@
+{
+  "name": "@workspace/db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:migrate": "tsx migrate.ts",
+    "db:drop": "drizzle-kit drop",
+    "db:reset": "pnpm db:drop && pnpm db:migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.4.1",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "drizzle-orm": "^0.44.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.4",
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.7.1"
+  }
+}
