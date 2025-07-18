@@ -5,6 +5,8 @@ import { trpcServer } from '@hono/trpc-server'
 import { cors } from "hono/cors";
 import { auth } from './lib/auth';
 
+// Get CORS origin from env or default to localhost:3000
+const CORS_ORIGIN = process.env.WEB_APP_BASE_URL || ["http://localhost:3000"];
 
 const app = new Hono<{
   Variables: {
@@ -15,7 +17,7 @@ const app = new Hono<{
 
 // Global CORS middleware for all routes
 app.use("*", cors({
-  origin: ["http://localhost:3000"],
+  origin: CORS_ORIGIN,
   allowHeaders: ["Content-Type", "Authorization"],
   allowMethods: ["POST", "GET", "OPTIONS"],
   exposeHeaders: ["Content-Length"],
