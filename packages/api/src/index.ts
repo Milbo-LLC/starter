@@ -1,6 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { appRouter } from './routers/app.router.js'
+import { appRouter, type AppRouter } from './routers'
 import { trpcServer } from '@hono/trpc-server'
 import { cors } from "hono/cors";
 import { auth } from './lib/auth';
@@ -58,3 +58,6 @@ serve({
 }, (info) => {
   console.log(`Server is running on http://localhost:${info.port}`)
 })
+
+export { appRouter };
+export type { AppRouter };
