@@ -16,6 +16,7 @@
     }
   },
   "dependencies": {
+    "@hono/node-server": "^1.16.0",
     "@hono/trpc-server": "^0.3.4",
     "@trpc/server": "^11.4.1",
     "@workspace/db": "workspace:*",
