@@ -2,7 +2,7 @@ version: 3
 
 tasks:
   lint:
-    desc: "Lint TypeScript code in api, db, and tooling packages"
+    desc: "Lint TypeScript code in api, and db"
     cmds:
       - |
         echo "Linting all packages in parallel"
@@ -12,7 +12,7 @@ tasks:
         wait
       
   lint:fix:
-    desc: "Lint and fix TypeScript code in api, db, and tooling packages"
+    desc: "Lint and fix TypeScript code in api, db"
     cmds:
       - |
         echo "Linting all packages in parallel"
@@ -20,7 +20,7 @@ tasks:
         cd packages/db && bun run lint:fix & \
         cd packages/web && bun run lint:fix & \
         wait
-
+      
   db:generate-migrations:
     desc: "Generate database migrations"
     dir: packages/db
@@ -67,7 +67,7 @@ tasks:
 
       - |
         echo "Checking to see if .env files exist"
-        # files are in packages/api, packages/db, and packages/next-app
+        # files are in packages/api, packages/db, and packages/web
         if [ ! -f packages/api/.env ]; then
           echo "Creating .env file in packages/api"
           cp packages/api/.env.example packages/api/.env
@@ -80,11 +80,12 @@ tasks:
           echo "Creating .env.local file in packages/web"
           cp packages/web/.env.example packages/web/.env.local
         fi
+
       - |
         echo "Applying migrations to the database"
       - task: db:migrate
       - |
         bunx concurrently --restart-tries 99999999 --restart-after 1000 \
-        "cd packages/api && bun run dev" \
-        "cd packages/db && bun run drizzle-kit studio --port 8082" \
-        "cd packages/web && bun run dev" \
+         "cd packages/api && bun run dev" \
+         "cd packages/db && bun run drizzle-kit studio --port 8082" \
+         "cd packages/web && bun run dev"
