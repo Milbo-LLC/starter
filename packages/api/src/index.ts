@@ -5,7 +5,7 @@ import { trpcServer } from '@hono/trpc-server'
 import { cors } from "hono/cors";
 import { auth } from './lib/auth';
 
-const ORIGIN = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const ORIGIN = process.env.WEB_APP_BASE_URL || "http://localhost:3000";
 
 const app = new Hono<{
   Variables: {
