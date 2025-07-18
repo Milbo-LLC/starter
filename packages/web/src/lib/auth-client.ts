@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react"
 import { organizationClient } from "better-auth/client/plugins"
 
-const baseURL = process.env.NEXT_PUBLIC_TRPC_SERVER_URL || "http://localhost:3042"
+const baseURL = process.env.API_BASE_URL || "http://localhost:3042"
 
 export const authClient = createAuthClient({
   baseURL,
