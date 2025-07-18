@@ -2,12 +2,12 @@ FROM oven/bun:1
 
 WORKDIR /app
 
-# Copy root workspace files
-COPY package.json .
-COPY bun.lockb .
+# Copy API package files first
+COPY . ./
 
-# Copy API package
-COPY packages/api ./packages/api
+# Go up one directory and copy workspace files
+COPY ../../package.json ./
+COPY ../../bun.lockb ./
 
 # Install dependencies
 RUN bun install --frozen-lockfile
@@ -16,4 +16,4 @@ RUN bun install --frozen-lockfile
 ENV NODE_ENV=production
 
 # Start the server
-CMD ["bun", "packages/api/src/index.ts"]
+CMD ["bun", "src/index.ts"]
