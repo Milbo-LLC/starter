@@ -1,8 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@workspace/db";
-import { authSchema } from "@workspace/db/src/schema/auth.schema";
 import { organization } from "better-auth/plugins"
+import { db, authSchema } from "@workspace/db";
 import { afterCreateUser } from "../hooks/user/after-create";
 import { beforeCreateSession } from "../hooks/session/before-create";
 import { sendOrganizationInvitation, sendResetPasswordEmail, sendVerificationEmail } from "../routers/email.router";

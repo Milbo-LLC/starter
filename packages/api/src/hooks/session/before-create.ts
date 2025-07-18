@@ -1,6 +1,5 @@
 import { type Session } from 'better-auth';
-import { db } from '@nimbus/db';
-import { member } from '@nimbus/db/src/schema/auth.schema';
+import { db, member } from '@workspace/db';
 import { eq } from 'drizzle-orm';
 
 interface ExtendedSession extends Session {

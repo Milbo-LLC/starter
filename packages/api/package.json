@@ -1,6 +1,6 @@
 {
   "name": "@workspace/api",
-  "module": "src/main.ts",
+  "module": "src/index.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -16,17 +16,18 @@
     }
   },
   "dependencies": {
-    "@workspace/db": "workspace:*",
     "@hono/trpc-server": "^0.3.4",
     "@trpc/server": "^11.4.1",
+    "@workspace/db": "workspace:*",
     "drizzle-orm": "^0.44.2",
     "hono": "^4.7.11",
     "jose": "^6.0.11",
     "trpc-to-openapi": "^2.3.1",
+    "uuid": "^11.1.0",
     "zod": "^3.25.64"
   },
   "scripts": {
-    "dev": "bun run --watch src/main.ts",
+    "dev": "bun run --watch src/index.ts",
     "lint": "eslint --cache src",
     "lint:fix": "eslint --cache src --fix",
     "test": "bun test"

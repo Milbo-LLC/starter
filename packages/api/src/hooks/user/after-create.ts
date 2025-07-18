@@ -1,7 +1,6 @@
 import { type User } from 'better-auth';
 import { v4 as uuidv4 } from 'uuid';
-import { db } from '@nimbus/db';
-import { organization, member } from '@nimbus/db/src/schema/auth.schema';
+import { db, organization, member } from '@workspace/db';
 
 export const afterCreateUser = async (
   user: User,

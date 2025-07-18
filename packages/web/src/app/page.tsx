@@ -1,11 +1,13 @@
-'use client'
+import { authClient } from "@/lib/auth-client";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { useTRPC } from "@/lib/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+export default async function Home() {
+  const session = await authClient.getSession({
+    fetchOptions: {
+      headers: await headers(),
+    },
+  });
 
-export default function Home() {
-  const trpc = useTRPC();
-  const greeting = useQuery(trpc.hello.queryOptions());
-  if (!greeting.data) return <div>Loading...</div>;
-  return <div>{greeting.data}</div>;
+  redirect(session.data?.user ? "/dashboard" : "/login");
 }

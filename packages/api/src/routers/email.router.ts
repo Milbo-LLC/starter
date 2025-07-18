@@ -31,7 +31,7 @@ export async function sendVerificationEmail({ to, token, url }: AuthEmailProps) 
       to,
       subject: "Verify your email address",
       html: `
-        <h1>Welcome to Nimbus!</h1>
+        <h1>Welcome to Starter!</h1>
         <p>Please click the link below to verify your email address:</p>
         <a href=${url}>
           Verify Email
@@ -86,7 +86,7 @@ export async function sendOrganizationInvitation({
       subject: `You've been invited to join ${teamName}`,
       html: `
         <h1>You've been invited to join ${teamName}!</h1>
-        <p>${invitedByUsername} (${invitedByEmail}) has invited you to join their team on Nimbus.</p>
+        <p>${invitedByUsername} (${invitedByEmail}) has invited you to join their team on Starter.</p>
         <p>Click the link below to accept the invitation:</p>
         <a href="${inviteLink}">
           Accept Invitation
