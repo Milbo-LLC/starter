@@ -26,7 +26,7 @@ export default async function VerifyEmailPage({
     // If verification is successful, the user will be redirected to the dashboard
     // If we reach here, something went wrong but didn't throw an error
     redirect("/login");
-  } catch (error) {
+  } catch {
     return (
       <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
         <div className="w-full max-w-sm">

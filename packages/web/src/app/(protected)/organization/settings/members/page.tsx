@@ -15,13 +15,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
+import { type Member } from "better-auth/plugins"
 
 type Role = "owner" | "admin" | "member"
 
 export default function TeamMembersPage() {
   const router = useRouter()
   const { data: organization } = authClient.useActiveOrganization()
-  const [activeMember, setActiveMember] = useState<any>(null)
+  const [activeMember, setActiveMember] = useState<Member | null>(null)
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -31,7 +32,7 @@ export default function TeamMembersPage() {
     const fetchActiveMember = async () => {
       try {
         const member = await authClient.organization.getActiveMember()
-        setActiveMember(member)
+        setActiveMember(member.data)
       } catch (error) {
         console.error("Failed to fetch active member:", error)
       }
@@ -125,7 +126,7 @@ export default function TeamMembersPage() {
     }
   }
 
-  const isOwner = activeMember.data.role === "owner"
+  const isOwner = activeMember.role === "owner"
   
   const pendingInvitations = organization.invitations?.filter(invitation => invitation.status === "pending") ?? []
 

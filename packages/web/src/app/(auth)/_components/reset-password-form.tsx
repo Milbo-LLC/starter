@@ -41,7 +41,7 @@ export function ResetPasswordForm({
       } else {
         setIsSuccess(true)
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.")
     } finally {
       setIsLoading(false)

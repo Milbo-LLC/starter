@@ -53,7 +53,7 @@ export function SignUpForm({
       } else {
         setIsSuccess(true)
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.")
     } finally {
       setIsLoading(false)
@@ -66,13 +66,13 @@ export function SignUpForm({
         <CardHeader>
           <CardTitle>Check your email</CardTitle>
           <CardDescription>
-            We've sent you a verification link. Please check your email and click the link to verify your account.
+            We&apos;ve sent you a verification link. Please check your email and click the link to verify your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center text-sm">
             <p className="mb-4">
-              Once verified, you'll be able to sign in to your account.
+              Once verified, you&apos;ll be able to sign in to your account.
             </p>
             <Link href="/login" className="text-blue-600 hover:text-blue-800 underline underline-offset-4">
               Return to login

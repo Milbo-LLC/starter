@@ -48,7 +48,7 @@ export function LoginForm({
       if (result.error) {
         setError(result.error.message || "Invalid email or password")
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.")
     } finally {
       setIsLoading(false)

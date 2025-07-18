@@ -40,7 +40,7 @@ export function ForgotPasswordForm({
       } else {
         setIsSuccess(true)
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred. Please try again.")
     } finally {
       setIsLoading(false)
@@ -53,13 +53,13 @@ export function ForgotPasswordForm({
         <CardHeader>
           <CardTitle>Check your email</CardTitle>
           <CardDescription>
-            We've sent you a password reset link. Please check your email and click the link to reset your password.
+            We&apos;ve sent you a password reset link. Please check your email and click the link to reset your password.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center text-sm">
             <p className="mb-4">
-              The link will expire in 1 hour. If you don't see the email, check your spam folder.
+              The link will expire in 1 hour. If you don&apos;t see the email, check your spam folder.
             </p>
             <Link href="/login" className="text-blue-600 hover:text-blue-800 underline underline-offset-4">
               Return to login
@@ -76,7 +76,7 @@ export function ForgotPasswordForm({
         <CardHeader>
           <CardTitle>Reset your password</CardTitle>
           <CardDescription>
-            Enter your email address and we'll send you a link to reset your password
+            Enter your email address and we&apos;ll send you a link to reset your password
           </CardDescription>
         </CardHeader>
         <CardContent>
