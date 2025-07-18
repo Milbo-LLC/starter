@@ -2,21 +2,15 @@ FROM oven/bun:1
 
 WORKDIR /app
 
-# Copy package files for workspace
+# Copy root workspace files
 COPY package.json .
 COPY bun.lockb .
-COPY packages/api/package.json ./packages/api/
-COPY packages/db/package.json ./packages/db/
+
+# Copy API package
+COPY packages/api ./packages/api
 
 # Install dependencies
 RUN bun install --frozen-lockfile
-
-# Copy source code
-COPY packages/api/src ./packages/api/src
-COPY packages/api/tsconfig.json ./packages/api/
-COPY packages/db/src ./packages/db/src
-COPY packages/db/tsconfig.json ./packages/db/
-COPY tsconfig.json .
 
 # Set environment to production
 ENV NODE_ENV=production
