@@ -1,6 +1,6 @@
 {
-  "name": "starter",
-  "module": "index.ts",
+  "name": "@workspace/api",
+  "module": "src/index.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -13,13 +13,31 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
   "dependencies": {
-    "@hono/trpc-server": "^0.4.0",
-    "dotenv": "^17.2.0",
-    "drizzle-orm": "^0.44.3",
-    "pg": "^8.16.3"
+    "@hono/node-server": "^1.16.0",
+    "@hono/trpc-server": "^0.3.4",
+    "@trpc/server": "^11.4.1",
+    "@workspace/db": "workspace:*",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.7.11",
+    "jose": "^6.0.11",
+    "pg": "^8.16.3",
+    "resend": "^4.7.0",
+    "trpc-to-openapi": "^2.3.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.64"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "lint": "eslint --cache src",
+    "lint:fix": "eslint --cache src --fix",
+    "test": "bun test"
   }
 }

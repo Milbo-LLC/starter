@@ -13,5 +13,5 @@ RUN bun install
 # Set environment to production
 ENV NODE_ENV=production
 
-# Start the server
-CMD ["bun", "src/index.ts"]
+# Start the server using npm script
+CMD ["bun", "run", "start"]
