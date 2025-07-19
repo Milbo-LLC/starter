@@ -35,6 +35,7 @@
   },
   "scripts": {
     "dev": "bun run --watch src/index.ts",
+    "build": "bun run build",
     "start": "bun src/index.ts",
     "lint": "eslint --cache src",
     "lint:fix": "eslint --cache src --fix",
